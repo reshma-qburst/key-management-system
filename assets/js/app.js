@@ -1,8 +1,6 @@
 (function() {
     'use strict';
-    var app = angular.module('MainController', [
-        'ui.router'
-    ]);
+    var app = angular.module('keyManagement', ['ui.router', 'ngTable']);
 
     app.config(function($stateProvider, $urlRouterProvider) {
 
