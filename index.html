@@ -16,13 +16,16 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="assets/js/build/angular-ui-router.min.js">
-    </script>
+    <script src="assets/js/build/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="assets/js/build/key-app.min.js"></script>
 </head>
 
 <body ng-cloak ng-controller="mainController">
-    <div ui-view></div>
+    <div ui-view="header"></div>
+    <div class="container">
+        <div ui-view="content"></div>
+    </div>
+    <div ui-view="footer"></div>
 </body>
 
 </html>

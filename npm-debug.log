@@ -1,0 +1,127 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save-dev',
+1 verbose cli   'gulp-replace' ]
+2 info using npm@3.10.7
+3 info using node@v6.4.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData gulp-replace
+8 silly fetchNamedPackageData gulp-replace
+9 silly mapToRegistry name gulp-replace
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'gulp-replace',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   escapedName: 'gulp-replace',
+12 silly mapToRegistry   name: 'gulp-replace',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri https://registry.npmjs.org/gulp-replace
+14 verbose request uri https://registry.npmjs.org/gulp-replace
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 9:58:06 AM
+17 verbose request id 80fb51bc7f05f2dd
+18 http request GET https://registry.npmjs.org/gulp-replace
+19 http 200 https://registry.npmjs.org/gulp-replace
+20 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+20 verbose headers   etag: '"32UX7R977S5DQ767XMFZ6VE4N"',
+20 verbose headers   'content-type': 'application/json',
+20 verbose headers   'content-encoding': 'gzip',
+20 verbose headers   'cache-control': 'max-age=300',
+20 verbose headers   'content-length': '3380',
+20 verbose headers   'accept-ranges': 'bytes',
+20 verbose headers   date: 'Thu, 15 Sep 2016 04:28:05 GMT',
+20 verbose headers   via: '1.1 varnish',
+20 verbose headers   age: '88',
+20 verbose headers   connection: 'keep-alive',
+20 verbose headers   'x-served-by': 'cache-sin6927-SIN',
+20 verbose headers   'x-cache': 'HIT',
+20 verbose headers   'x-cache-hits': '1',
+20 verbose headers   'x-timer': 'S1473913685.512505,VS0,VE0',
+20 verbose headers   vary: 'Accept-Encoding' }
+21 silly get cb [ 200,
+21 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+21 silly get     etag: '"32UX7R977S5DQ767XMFZ6VE4N"',
+21 silly get     'content-type': 'application/json',
+21 silly get     'content-encoding': 'gzip',
+21 silly get     'cache-control': 'max-age=300',
+21 silly get     'content-length': '3380',
+21 silly get     'accept-ranges': 'bytes',
+21 silly get     date: 'Thu, 15 Sep 2016 04:28:05 GMT',
+21 silly get     via: '1.1 varnish',
+21 silly get     age: '88',
+21 silly get     connection: 'keep-alive',
+21 silly get     'x-served-by': 'cache-sin6927-SIN',
+21 silly get     'x-cache': 'HIT',
+21 silly get     'x-cache-hits': '1',
+21 silly get     'x-timer': 'S1473913685.512505,VS0,VE0',
+21 silly get     vary: 'Accept-Encoding' } ]
+22 verbose get saving gulp-replace to /home/reshma/.npm/registry.npmjs.org/gulp-replace/.cache.json
+23 verbose correctMkdir /home/reshma/.npm correctMkdir not in flight; initializing
+24 silly install normalizeTree
+25 silly loadCurrentTree Finishing
+26 silly loadIdealTree Starting
+27 silly install loadIdealTree
+28 silly cloneCurrentTree Starting
+29 silly install cloneCurrentTreeToIdealTree
+30 silly cloneCurrentTree Finishing
+31 silly loadShrinkwrap Starting
+32 silly install loadShrinkwrap
+33 silly loadShrinkwrap Finishing
+34 silly loadAllDepsIntoIdealTree Starting
+35 silly install loadAllDepsIntoIdealTree
+36 silly resolveWithNewModule gulp-replace@0.5.4 checking installable status
+37 silly cache add args [ 'gulp-replace', null ]
+38 verbose cache add spec gulp-replace
+39 silly cache add parsed spec Result {
+39 silly cache add   raw: 'gulp-replace',
+39 silly cache add   scope: null,
+39 silly cache add   escapedName: 'gulp-replace',
+39 silly cache add   name: 'gulp-replace',
+39 silly cache add   rawSpec: '',
+39 silly cache add   spec: 'latest',
+39 silly cache add   type: 'tag' }
+40 silly addNamed gulp-replace@latest
+41 verbose addNamed "latest" is being treated as a dist-tag for gulp-replace
+42 info addNameTag [ 'gulp-replace', 'latest' ]
+43 silly mapToRegistry name gulp-replace
+44 silly mapToRegistry using default registry
+45 silly mapToRegistry registry https://registry.npmjs.org/
+46 silly mapToRegistry data Result {
+46 silly mapToRegistry   raw: 'gulp-replace',
+46 silly mapToRegistry   scope: null,
+46 silly mapToRegistry   escapedName: 'gulp-replace',
+46 silly mapToRegistry   name: 'gulp-replace',
+46 silly mapToRegistry   rawSpec: '',
+46 silly mapToRegistry   spec: 'latest',
+46 silly mapToRegistry   type: 'tag' }
+47 silly mapToRegistry uri https://registry.npmjs.org/gulp-replace
+48 verbose addNameTag registry:https://registry.npmjs.org/gulp-replace not in flight; fetching
+49 verbose get https://registry.npmjs.org/gulp-replace not expired, no request
+50 silly addNameTag next cb for gulp-replace with tag latest
+51 silly addNamed gulp-replace@0.5.4
+52 verbose addNamed "0.5.4" is a plain semver version for gulp-replace
+53 silly rollbackFailedOptional Starting
+54 silly rollbackFailedOptional Finishing
+55 silly runTopLevelLifecycles Finishing
+56 silly install printInstalled
+57 verbose stack Error: EIO: i/o error, read
+57 verbose stack     at Error (native)
+58 verbose cwd /opt/lampp/htdocs/key-management-system
+59 error Linux 3.16.0-71-generic
+60 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "--save-dev" "gulp-replace"
+61 error node v6.4.0
+62 error npm  v3.10.7
+63 error code EIO
+64 error errno -5
+65 error syscall read
+66 error EIO: i/o error, read
+67 error If you need help, you may report this error at:
+67 error     <https://github.com/npm/npm/issues>
+68 verbose exit [ -5, true ]
