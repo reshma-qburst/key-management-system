@@ -13,7 +13,7 @@ gulp.task('default', ['user', 'htmlMinify', 'buildcss']);
 
 // concat and minify js files
 gulp.task('user', function() {
-    gulp.src(['assets/js/**/*.js'])
+    return gulp.src(['assets/js/**/*.js'])
         .pipe(concat('key-app.min.js'))
         .pipe(ngAnnotate())
         .pipe(gulp.dest('assets/js/build/'))
