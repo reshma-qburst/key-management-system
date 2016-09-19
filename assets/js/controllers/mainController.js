@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement', ['ui.router']).controller('mainController', ['$scope', function($scope) {
+    angular.module('keyManagement').controller('mainController', ['$scope', function($scope) {
         console.log("main controller");
     }]);
 })();
