@@ -1,7 +1,9 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ['$scope', function($scope) {
-        console.log("main controller");
+    angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope",function (NgTableParams,loadJson,$scope){
+    	loadJson.getTableDefaultList().then(function(tableData) {
+    		$scope.data =  tableData;
+		});
     }]);
 })();

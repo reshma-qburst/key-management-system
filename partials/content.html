@@ -1,27 +1,71 @@
 <!-- content.html -->
-<button class="btn btn-primary btn-sm">Add</button>
-<div class="jumbotron text-center">
-    <h1>The Home Page</h1>
-    <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table demoTable" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
-        <colgroup>
-            <col width="65%" />
-            <col width="10%" />
-            <col width="10%" />
-            <col width="15%" />
-        </colgroup>
-        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
-            <td title="'Description'" filter="{description: 'text'}" sortable="'name'" ng-switch="row.isEditing" ng-class="name.$dirty ? 'bg-warning' : ''" ng-form="name" demo-tracked-table-cell>
-                <span ng-switch-default class="editable-text">{{row.name}}</span>
-                <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                    <input type="text" name="description" ng-model="row.name" class="editable-input form-control input-sm" required />
-                </div>
-            </td>
-            <td>
-                <button class="btn btn-primary btn-sm" ng-click="demo.save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
-                <button class="btn btn-default btn-sm" ng-click="demo.cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
-                <button class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
-                <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
-            </td>
-        </tr>
-    </table>
+<div class="container">
+    <button class="btn">Add</button>
+    <div class="jumbotron text-center">
+        <table ng-table="tableParams" class="table-bordered">
+            <colgroup>
+                <col width="65%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="15%" />
+            </colgroup>
+            <tr>
+                <td title="'Description'" filter="{description: 'text'}">{{data[0].description}}
+                    <!-- <span ng-switch-default class="editable-text">{{data[0].description}}</span>
+                    <div class="controls" ng-class="description.$invalid && description.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Type of Key'" filter="{typeOfKey: 'text'}">{{data[0].typeOfKey}}
+                    <!-- <span ng-switch-default class="editable-text">{{data[0].typeOfKey}}</span>
+                    <div class="controls" ng-class="typeOfKey.$invalid && typeOfKey.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="typeOfKey" ng-model="row.typeOfKey" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Validation Mode'" filter="{validationMode: 'text'}">{{data[0].validationMode}}<!-- 
+                    <span ng-switch-default class="editable-text">{{data[0].validationMode}}</span>
+                    <div class="controls" ng-class="validationMode.$invalid && validationMode.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.validationMode" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Size of Key'" filter="{sizeOfKey: 'text'}">{{data[0].sizeOfKey}}
+                    <!-- <span ng-switch-default class="editable-text">{{data[0].sizeOfKey}}</span>
+                    <div class="controls" ng-class="sizeOfKey.$invalid && sizeOfKey.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.sizeOfKey" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Password'" filter="{password: 'text'}">
+                {{data[0].password}}
+                    <!-- <span ng-switch-default class="editable-text">{{data[0].password}}</span>
+                    <div class="controls" ng-class="password.$invalid && password.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.password" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Confirm Password'" filter="{confirmPassword: 'text'}">{{data[0].confirmPassword}}
+                   <!--  <span ng-switch-default class="editable-text">{{data[0].confirmPassword}}</span>
+                    <div class="controls" ng-class="confirmPassword.$invalid && confirmPassword.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.confirmPassword" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Activates On'" filter="{activatesOn: 'text'}" >{{data[0].activatesOn}}
+                    <!-- <span ng-switch-default class="editable-text">{{data[0].activatesOn}}</span>
+                    <div class="controls" ng-class="activatesOn.$invalid && activatesOn.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.activatesOn" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td title="'Expires On'" filter="{expiresOn: 'text'}" >{{data[0].expiresOn}}
+                   <!--  <span ng-switch-default class="editable-text">{{data[0].expiresOn}}</span>
+                    <div class="controls" ng-class="expiresOn.$invalid && expiresOn.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                        <input type="text" name="description" ng-model="row.expiresOn" class="editable-input form-control input-sm" required />
+                    </div> -->
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" ng-click="demo.save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
+                    <button class="btn btn-default btn-sm" ng-click="demo.cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

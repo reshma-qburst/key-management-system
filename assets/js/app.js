@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-angular.module('keyManagement', ['ui.router'])
+angular.module('keyManagement', ['ui.router','ngTable'])
 
 .config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/');
@@ -16,7 +16,10 @@ angular.module('keyManagement', ['ui.router'])
                     controller : 'mainController'
                 },
                 'footer' : {
-                        templateUrl: 'min_partials/footer.html'
+                    templateUrl: 'min_partials/footer.html'
+                },
+                'left' : {
+                    templateUrl: 'min_partials/leftMenu.html'
                 }
           }
         })

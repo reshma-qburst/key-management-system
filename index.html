@@ -17,17 +17,17 @@
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <script src="https://cdn.rawgit.com/esvit/ng-table/1.0.0/dist/ng-table.js"></script>
     <script type="text/javascript" src="assets/js/build/key-app.min.js"></script>
 </head>
 
 <body ng-cloak ng-app="keyManagement">
-<div>
-    <div ui-view="header"></div>
-    <div ui-view="left"></div>
-    <div class="container">
-        <div ui-view="content"></div>
+    <div>
+        <div ui-view="header"></div>
+        <div ui-view="left" class="leftNav"></div>
+        <div ui-view="content" class="contentDiv"></div>
+        <div ui-view="footer"></div>
     </div>
-    <div ui-view="footer"></div></div>
 </body>
 
 </html>

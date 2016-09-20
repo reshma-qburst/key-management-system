@@ -19,6 +19,7 @@ gulp.task('user', function() {
         .pipe(gulp.dest('assets/js/build/'))
 });
 
+// minify html files
 gulp.task('htmlMinify', function() {
     return gulp.src('partials/**/*.html')
         .pipe(htmlmin({
@@ -30,10 +31,16 @@ gulp.task('htmlMinify', function() {
         .pipe(gulp.dest('min_partials/'))
 });
 
-// compile sass to css and minify
+// concat and minify css files
 gulp.task('buildcss', function() {
     gulp.src('sass/main.scss')
         .pipe(concat('key-app.min.css'))
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
         .pipe(gulp.dest('assets/css/'));
+});
+
+gulp.task('watch', function() {
+    gulp.watch('sass/main.scss', ['buildcss']);
+    gulp.watch(['assets/js/**/*.js'], ['user']);
+    gulp.watch('partials/**/*.html', ['htmlMinify']);
 });
