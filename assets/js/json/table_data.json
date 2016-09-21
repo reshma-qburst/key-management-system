@@ -1,0 +1,13 @@
+[
+    {
+        "description": "Description 1",
+        "typeOfKey": "Type 1",
+        "typeOfKeyId": "0",
+        "validationMode": "true" ,
+        "validationModeId": "0",
+        "sizeOfKey": "small",
+        "activatesOn": "23-09-2016",
+        "expiresOn": "30-09-2016",
+        "key" : "H4geG$35gHFJ550@nY"
+    }
+]
