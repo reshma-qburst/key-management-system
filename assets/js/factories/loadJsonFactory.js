@@ -4,7 +4,7 @@
         return {
             getTableDefaultList: function() {
                 var tableDefaultList = $http.get('assets/js/json/table_data.json').then(function(response) {
-                    return response.data;
+                    return response;
                 });
                 return tableDefaultList;
             }
