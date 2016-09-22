@@ -55,6 +55,23 @@
                 'key' : genKey
             });
 	    };
+
+	    $scope.delete = function(id) {
+			if(id==0){
+				
+			}else{
+	            angular.forEach($scope.data, function(value,key){
+	            	if(key == id){
+						$scope.data.splice( id, 1 );
+	                }
+	            }); 
+			}
+        };
+
+        $scope.edit = function(id){
+        	$scope.isEditing = true;
+		};
+
     }]);
 })();
 
