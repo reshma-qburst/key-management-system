@@ -1,9 +1,10 @@
 <!-- content.html -->
 <div class="container">
+    <div class="alert alert-warning" ng-if="showError">This is the default data!</div>
     <button class="addButton" ng-click="toggleModal()">Add</button>
     <!-- MODAL WINDOW STARTS -->
     <modal title="Add New" visible="showModal">
-        <form role="form" ng-submit="addDataToTable(newdata);">
+        <form role="form" name="modalForm" ng-submit="addDataToTable(newdata);">
           <div class="form-group">
             <label for="descriptionNew">Description</label>
             <input type="text" class="form-control" id="descriptionNew" ng-model="newdata.description" />
@@ -69,71 +70,71 @@
     </modal>
     <!-- MODAL WINDOW ENDS -->
     <!-- ANGULAR TABLE -->
-    <div class="tableWrapper">
+    <div class="tableWrapper">{{$scope.dateToday}}
         <table ng-table="tableParams" ng-form="tableForm" class="table-bordered">
             <tr ng-repeat="row in data track by $index" ng-form="rowForm">
                 <td title="'Description'">
-                    <span class="editable-text" ng-if="!isEditing">{{row.description}}</span>
-                    <div class="controls" ng-if="isEditing">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.description}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm" required />
                     </div> 
                 </td>
                 <td title="'Type of Key'">
-                    <span class="editable-text" ng-if="!isEditing">{{row.typeOfKey}}</span>
-                    <div class="controls" ng-if="isEditing">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.typeOfKey}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="typeOfKey" ng-model="row.typeOfKey" class="editable-input form-control input-sm" required />
                     </div> 
                 </td>
                 <td title="'Validation Mode'">
-                    <span class="editable-text" ng-if="!isEditing">{{row.validationMode}}</span> 
-                    <div class="controls" ng-if="isEditing">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.validationMode}}</span> 
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="validationMode" ng-model="row.validationMode" class="editable-input form-control input-sm" required />
                     </div> 
                 </td>
                 <td title="'Size of Key'">
-                    <span class="editable-text" ng-if="!isEditing">{{row.sizeOfKey}}</span>
-                    <div class="controls" ng-if="isEditing">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.sizeOfKey}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="sizeOfKey" ng-model="row.sizeOfKey" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
                 <td title="'Password'">
-                    <span  class="editable-text" ng-if="!isEditing">{{row.password}}</span>
-                    <div class="controls" ng-if="isEditing">
+                    <span  class="editable-text" ng-if="!row.isEditing">{{row.password}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="password" ng-model="row.password" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
                 <td title="'Confirm Password'">
-                   <span  class="editable-text" ng-if="!isEditing">{{row.confirmPassword}}</span>
-                    <div class="controls" ng-if="isEditing">
+                   <span  class="editable-text" ng-if="!row.isEditing">{{row.confirmPassword}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="confirmPassword" ng-model="row.confirmPassword" class="editable-input form-control input-sm" required />
                     </div> 
                 </td>
                 <td title="'Activates On'">
-                    <span  class="editable-text" ng-if="!isEditing">{{row.activatesOn}}</span>
-                    <div class="controls" ng-if="isEditing">
+                    <span  class="editable-text" ng-if="!row.isEditing">{{row.activatesOn}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="row.activatesOn" ng-model="row.activatesOn" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
                 <td title="'Expires On'">
-                    <span  class="editable-text" ng-if="!isEditing">{{row.expiresOn}}</span>
-                    <div class="controls" ng-if="isEditing">
+                    <span  class="editable-text" ng-if="!row.isEditing">{{row.expiresOn}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="row.expiresOn" ng-model="row.expiresOn" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
-                <td title="'Key'">
-                   <span class="editable-text" ng-if="!isEditing">{{row.key}}</span>
-                    <div class="controls" ng-if="isEditing">
+                <td title="'Key'" ng-class="{'greenHighlight': row.activatesOn > dateToday , 'yellowHighlight': row.activatesOn == dateToday , 'redHighlight' : row.activatesOn < dateToday}">
+                   <span class="editable-text" ng-if="!row.isEditing">{{row.key}}</span>
+                    <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="key" ng-model="row.key" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn-primary btn-sm" ng-click="save(row, rowForm)" ng-if="isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span>
+                    <button class="btn btn-primary btn-sm" ng-click="save(row);" ng-if="row.isEditing" ng-disabled="rowForm.$pristine"><span class="glyphicon glyphicon-ok"></span>
                     </button>
-                    <button class="btn btn-default btn-sm" ng-click="cancel(row, rowForm)" ng-if="isEditing"><span class="glyphicon glyphicon-remove"></span>
+                    <button class="btn btn-default btn-sm" ng-click="cancel(row,rowForm);" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span>
                     </button>
-                    <button class="btn btn-default btn-sm" ng-click="edit($index);" ng-if="!isEditing"><span class="glyphicon glyphicon-pencil"></span>
+                    <button class="btn btn-default btn-sm" ng-click="edit($index,row);" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span>
                     </button>
-                    <button class="btn btn-danger btn-sm" ng-click="delete($index);" ng-if="!isEditing"><span class="glyphicon glyphicon-trash"></span>
+                    <button class="btn btn-danger btn-sm" ng-click="delete($index);" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </td>
             </tr>

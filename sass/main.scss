@@ -101,3 +101,15 @@ table {
     *border-collapse: collapsed;
     border-radius: $table-bordered-border-radius;
 }
+
+.greenHighlight {
+  background-color: #00cc00;
+}
+
+.yellowHighlight {
+  background-color: #ffff4d; 
+}
+
+.redHighlight {
+  background-color: red;  
+}

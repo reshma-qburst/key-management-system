@@ -2,7 +2,10 @@
     "use strict";
 
     angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope",function (NgTableParams,loadJson,$scope){
-    	$scope.isEditing = false;
+    	$scope.showError = false;
+    	var todaysDate = new Date();
+    	$scope.dateToday = todaysDate.toDateString();
+
     	loadJson.getTableDefaultList().then(function(tableData) {
     		$scope.data =  [];
     		angular.forEach(tableData.data, function(item) {
@@ -31,35 +34,45 @@
 	    };
 
 	    $scope.beforeRender = function ($dates) {
-		    var today = new Date();
+	    	debugger;var today = new Date();
 		    var prevDate = (today.getDate()) - 1;
 		    today.setDate(prevDate);
 		    for(var d in $dates){         
 		        if($dates[d].utcDateValue<today){
 		            $dates[d].selectable = false
 		        }
-		    }  
+		    }
 		};
 
        	$scope.addDataToTable = function(obj){
+       		$scope.showError = false;
 	    	var genKey = Math.random().toString(36).substr(2, 16);
-	    	$scope.data.push({ 
+	    	var activatesOn = "";
+	    	var expiresOn = "";
+	    	if(undefined != obj.activatesOn){
+	    		activatesOn = obj.activatesOn.toDateString();
+	    	}
+	    	if(undefined != obj.expiresOn){
+	    		expiresOn = obj.expiresOn.toDateString();
+	    	}
+	    	$scope.data.push({
                 'description': obj.description, 
                 'typeOfKey': obj.typeOfKey,
                 'validationMode': obj.validationMode,
                 'sizeOfKey' : obj.sizeOfKey,
                 'password': obj.password,
                 'confirmPassword': obj.confirmpassword,
-                'activatesOn': obj.activatesOn,
-                'expiresOn': obj.expiresOn,
+                'activatesOn': activatesOn,
+                'expiresOn': expiresOn,
                 'key' : genKey
             });
 	    };
 
 	    $scope.delete = function(id) {
 			if(id==0){
-				
+				$scope.showError = true;
 			}else{
+				$scope.showError = false;
 	            angular.forEach($scope.data, function(value,key){
 	            	if(key == id){
 						$scope.data.splice( id, 1 );
@@ -68,8 +81,18 @@
 			}
         };
 
-        $scope.edit = function(id){
-        	$scope.isEditing = true;
+        $scope.edit = function(id,row){
+        	row.isEditing = true;
+        	$scope.showError = false;
+		};
+
+		$scope.cancel = function(row,rowForm){
+			rowForm.$setPristine();
+			row.isEditing = false;			
+		};
+
+		$scope.save = function(row){
+			row.isEditing = false;
 		};
 
     }]);
