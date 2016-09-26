@@ -1,7 +1,7 @@
 <!-- content.html -->
 <div class="container">
     <button class="addButton" ng-click="toggleModal()">Add</button>
-    <modal title="Add New" visible="showModal">
+    <datamodal title="Add New" visible="showModal">
         <form role="form">
           <div class="form-group">
             <label for="descriptionNew">Description</label>
@@ -65,7 +65,7 @@
           </div>
           <button class="btn btn-default" ng-click="addDataToTable();">Add</button>
         </form>
-    </modal>
+    </datamodal>
     <div class="tableWrapper">
         <table ng-table="tableParams" class="table-bordered">
             <tr>
