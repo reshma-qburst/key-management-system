@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope",function (NgTableParams,loadJson,$scope){
+    angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope", "datepickerBeforeRender",function (NgTableParams,loadJson,$scope,datepickerBeforeRender){
     	loadJson.getTableDefaultList().then(function(tableData) {
     		$scope.data =  tableData;
 		});
@@ -32,14 +32,8 @@
 	    };
 
 	    $scope.beforeRender = function ($dates) {
-		    var today = new Date();
-		    var prevDate = (today.getDate()) - 1;
-		    today.setDate(prevDate);
-		    for(var d in $dates){         
-		        if($dates[d].utcDateValue<today){
-		            $dates[d].selectable = false
-		        }
-		    }  
-		}
+		    datepickerBeforeRender.getDatesBeforeRender($dates);
+		};
+
     }]);
 })();
