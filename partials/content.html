@@ -3,7 +3,7 @@
     <div class="alert alert-warning" ng-if="showError">This is the default data!</div>
     <button class="addButton" ng-click="toggleModal()">Add</button>
     <!-- MODAL WINDOW STARTS -->
-    <modal title="Add New" visible="showModal">
+    <datamodal title="Add New" visible="showModal">
         <form role="form" name="modalForm" ng-submit="addDataToTable(newdata);">
           <div class="form-group">
             <label for="descriptionNew">Description</label>
@@ -67,17 +67,17 @@
           </div>
           <button type="submit" class="btn btn-default">Add</button>
         </form>
-    </modal>
+    </datamodal>
     <!-- MODAL WINDOW ENDS -->
     <!-- ANGULAR TABLE -->
-    <div class="tableWrapper">{{$scope.dateToday}}
+    <div class="tableWrapper">
         <table ng-table="tableParams" ng-form="tableForm" class="table-bordered">
             <tr ng-repeat="row in data track by $index" ng-form="rowForm">
                 <td title="'Description'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.description}}</span>
                     <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm" required />
-                    </div> 
+                    </div>
                 </td>
                 <td title="'Type of Key'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.typeOfKey}}</span>

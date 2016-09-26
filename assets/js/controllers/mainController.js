@@ -1,11 +1,10 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope",function (NgTableParams,loadJson,$scope){
+    angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope", "datepickerBeforeRender",function (NgTableParams,loadJson,$scope,datepickerBeforeRender){
     	$scope.showError = false;
     	var todaysDate = new Date();
     	$scope.dateToday = todaysDate.toDateString();
-
     	loadJson.getTableDefaultList().then(function(tableData) {
     		$scope.data =  [];
     		angular.forEach(tableData.data, function(item) {
@@ -34,14 +33,7 @@
 	    };
 
 	    $scope.beforeRender = function ($dates) {
-	    	debugger;var today = new Date();
-		    var prevDate = (today.getDate()) - 1;
-		    today.setDate(prevDate);
-		    for(var d in $dates){         
-		        if($dates[d].utcDateValue<today){
-		            $dates[d].selectable = false
-		        }
-		    }
+	    	datepickerBeforeRender.getDatesBeforeRender($dates);
 		};
 
        	$scope.addDataToTable = function(obj){
