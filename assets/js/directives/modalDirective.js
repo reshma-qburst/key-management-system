@@ -1,7 +1,7 @@
 (function(){
 "use strict";
 
-  angular.module('keyManagement').directive('modal', function () {
+  angular.module('keyManagement').directive('datamodal', function () {
     return {
       template: '<div class="modal fade">' + 
           '<div class="modal-dialog">' + 
