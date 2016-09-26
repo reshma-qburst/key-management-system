@@ -86,7 +86,6 @@
 		$scope.save = function(row){
 			row.isEditing = false;
 		};
-
     }]);
 })();
 
