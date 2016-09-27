@@ -25,6 +25,7 @@
 	        	$scope.isValidationModeDisabled = false;
 	        }else if(val === "Type2" || val === "Type4"){
 	        	$scope.isValidationModeDisabled = true;
+	        	$scope.isSizeOfKeyDisabled = true;
 	        }
 	    };
 
@@ -36,28 +37,34 @@
 	    	datepickerBeforeRender.getDatesBeforeRender($dates);
 		};
 
-       	$scope.addDataToTable = function(obj){
-       		$scope.showError = false;
-	    	var genKey = Math.random().toString(36).substr(2, 16);
-	    	var activatesOn = "";
-	    	var expiresOn = "";
-	    	if(undefined != obj.activatesOn){
-	    		activatesOn = obj.activatesOn.toDateString();
+       	$scope.addDataToTable = function(obj,modalForm){
+       		if(obj != undefined){
+       			if(modalForm.$valid){
+		       		$scope.showError = false;
+			    	var genKey = Math.random().toString(36).substr(2, 16);
+			    	var activatesOn = "";
+			    	var expiresOn = "";
+			    	if(undefined != obj.activatesOn){
+			    		activatesOn = obj.activatesOn.toDateString();
+			    	}
+			    	if(undefined != obj.expiresOn){
+			    		expiresOn = obj.expiresOn.toDateString();
+			    	}
+			    	$scope.data.push({
+		                'description': obj.description, 
+		                'typeOfKey': obj.typeOfKey,
+		                'validationMode': obj.validationMode,
+		                'sizeOfKey' : obj.sizeOfKey,
+		                'password': obj.password,
+		                'confirmPassword': obj.confirmpassword,
+		                'activatesOn': activatesOn,
+		                'expiresOn': expiresOn,
+		                'key' : genKey
+		            });
+		            $scope.showModal = false;
+		            modalForm.$setPristine();
+		    	}
 	    	}
-	    	if(undefined != obj.expiresOn){
-	    		expiresOn = obj.expiresOn.toDateString();
-	    	}
-	    	$scope.data.push({
-                'description': obj.description, 
-                'typeOfKey': obj.typeOfKey,
-                'validationMode': obj.validationMode,
-                'sizeOfKey' : obj.sizeOfKey,
-                'password': obj.password,
-                'confirmPassword': obj.confirmpassword,
-                'activatesOn': activatesOn,
-                'expiresOn': expiresOn,
-                'key' : genKey
-            });
 	    };
 
 	    $scope.delete = function(id) {

@@ -103,7 +103,7 @@ table {
 }
 
 .greenHighlight {
-  background-color: #00cc00;
+  background-color: #4CAF50;
 }
 
 .yellowHighlight {
@@ -111,5 +111,10 @@ table {
 }
 
 .redHighlight {
-  background-color: red;  
+  background-color: #d43f3a;  
+}
+
+.msg-error{
+  color: #d43f3a;
+  font-size:14px;
 }
