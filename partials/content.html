@@ -80,7 +80,7 @@
     <!-- MODAL WINDOW ENDS -->
     <!-- ANGULAR TABLE -->
     <div class="tableWrapper">
-        <table ng-table="tableParams" ng-form="tableForm" class="table-bordered">
+        <table ng-table="tableParams" ng-form="tableForm" class="table table-bordered">
             <tr ng-repeat="row in data track by $index" ng-form="rowForm">
                 <td title="'Description'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.description}}</span>
