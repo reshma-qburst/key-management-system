@@ -3,6 +3,7 @@
 
     angular.module('keyManagement').controller('mainController', ["loadJson", "$scope", "datepickerBeforeRender",function (loadJson,$scope,datepickerBeforeRender){
     	$scope.showError = false;
+    	$scope.showEditError = false;
     	var todaysDate = new Date();
     	$scope.dateToday = todaysDate.toDateString();
     	loadJson.getTableDefaultList().then(function(tableData) {
@@ -42,6 +43,13 @@
        			if(modalForm.$valid){
 		       		$scope.showError = false;
 			    	var genKey = Math.random().toString(36).substr(2, 16);
+			    	angular.forEach($scope.data, function(objValue,objKey){
+		            	angular.forEach(objValue, function(val,key){
+		            		if(genKey == val){
+		            			Math.random().toString(36).substr(2, 16);
+		            		}
+		            	});
+		            });
 			    	var activatesOn = "";
 			    	var expiresOn = "";
 			    	if(undefined != obj.activatesOn){
@@ -69,8 +77,10 @@
 	    $scope.delete = function(id) {
 			if(id==0){
 				$scope.showError = true;
+				$scope.showEditError = false;
 			}else{
 				$scope.showError = false;
+				$scope.showEditError = false;
 				if (confirm("Are you sure you want to delete this row?")) {
 		            angular.forEach($scope.data, function(value,key){
 		            	if(key == id){
@@ -82,12 +92,23 @@
         };
 
         $scope.edit = function(id,row){
-        	row.isEditing = true;
-        	$scope.showError = false;
+        	var confirmPwd = prompt("Please enter your password to edit");
+        	if (confirmPwd != null && confirmPwd == row.password) {
+        		$scope.showEditError = false;
+        		$scope.dataToCancel = row;
+		        row.isEditing = true;
+        		$scope.showError = false;
+		    }else if(confirmPwd == null){
+		    	$scope.showEditError = false;
+		    }else if(confirmPwd != row.password){
+		    	$scope.showEditError = true;
+		    }else{
+		    	$scope.showEditError = false;
+		    	$scope.showError = false;
+		    }
 		};
 
 		$scope.cancel = function(row,rowForm){
-			rowForm.$setPristine();
 			row.isEditing = false;			
 		};
 

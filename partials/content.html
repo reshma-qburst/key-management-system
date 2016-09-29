@@ -1,5 +1,6 @@
 <!-- content.html -->
 <div class="container">
+    <div class="alert alert-danger" ng-if="showEditError">You have entered incorrect password!</div>
     <div class="alert alert-warning" ng-if="showError">This is the default data!</div>
     <button class="addButton" ng-click="toggleModal()">Add</button>
     <!-- MODAL WINDOW STARTS -->
@@ -107,16 +108,18 @@
                     </div>
                 </td>
                 <td title="'Password'">
-                    <!-- <span  class="editable-text" ng-if="!row.isEditing">{{row.password}}</span> -->
+                    <span  class="editable-text" ng-if="!row.isEditing">{{row.password}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="password" name="password" ng-model="row.password" class="editable-input form-control input-sm" required />
+                        <input type="password" id="password" name="password" ng-model="row.password" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
                 <td title="'Confirm Password'">
-                   <!-- <span  class="editable-text" ng-if="!row.isEditing">{{row.confirmPassword}}</span> -->
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="password" name="confirmPassword" ng-model="row.confirmPassword" class="editable-input form-control input-sm" required />
-                    </div> 
+                        <input type="password" id="confirmPassword" name="confirmPassword" ng-model="row.confirmPassword" class="editable-input form-control input-sm" pw-check="password" required />
+                    </div>
+                    <span class="msg-error" ng-show="tableForm.confirmPassword.$error.pwmatch">
+                            Passwords don't match.
+                        </span>
                 </td>
                 <td title="'Activates On'">
                     <span  class="editable-text" ng-if="!row.isEditing">{{row.activatesOn}}</span>
