@@ -50,12 +50,12 @@ nav {
 }
 
 footer {
-	border: 1px solid black;
+	  border: 1px solid black;
     margin: auto;
     height: 40px;
     background-color: #000;
     width: 100%;
-	position: absolute;
+	  position: fixed;
     bottom: 0;
 }
 
@@ -125,4 +125,8 @@ table {
 
 label {
   margin-bottom : 3px;
+}
+
+.mainWrapper {
+  padding-bottom : 150px;
 }

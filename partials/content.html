@@ -130,7 +130,7 @@
                         <input type="text" name="row.expiresOn" ng-model="row.expiresOn" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
-                <td title="'Key'" ng-class="{'greenHighlight': row.activatesOn > dateToday , 'yellowHighlight': row.activatesOn == dateToday , 'redHighlight' : row.activatesOn < dateToday}">
+                <td title="'Key'" ng-class="{'greenHighlight': row.activatesOn > dateToday, 'yellowHighlight': row.activatesOn == dateToday , 'redHighlight' : (row.expiresOn < dateToday && row.activatesOn < dateToday)}">
                    <span class="editable-text" ng-if="!row.isEditing">{{row.key}}</span>
                     <div class="controls" ng-if="row.isEditing">
                         <input type="text" name="key" ng-model="row.key" class="editable-input form-control input-sm" required />

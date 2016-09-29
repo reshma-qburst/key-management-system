@@ -71,11 +71,13 @@
 				$scope.showError = true;
 			}else{
 				$scope.showError = false;
-	            angular.forEach($scope.data, function(value,key){
-	            	if(key == id){
-						$scope.data.splice( id, 1 );
-	                }
-	            }); 
+				if (confirm("Are you sure you want to delete this row?")) {
+		            angular.forEach($scope.data, function(value,key){
+		            	if(key == id){
+							$scope.data.splice( id, 1 );
+		                }
+		            });
+	        	}
 			}
         };
 
