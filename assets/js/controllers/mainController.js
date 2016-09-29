@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ["NgTableParams", "loadJson", "$scope", "datepickerBeforeRender",function (NgTableParams,loadJson,$scope,datepickerBeforeRender){
+    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope", "datepickerBeforeRender",function (loadJson,$scope,datepickerBeforeRender){
     	$scope.showError = false;
     	var todaysDate = new Date();
     	$scope.dateToday = todaysDate.toDateString();
@@ -62,7 +62,6 @@
 		                'key' : genKey
 		            });
 		            $scope.showModal = false;
-		            modalForm.$setPristine();
 		    	}
 	    	}
 	    };

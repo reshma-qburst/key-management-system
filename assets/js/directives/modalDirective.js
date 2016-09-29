@@ -30,12 +30,15 @@
 
         $(element).on('shown.bs.modal', function(){
           scope.$apply(function(){
+            scope.$$childHead.modalForm.$submitted = false;
+            scope.$$childHead.newdata = {};
             scope.$parent[attrs.visible] = true;
           });
         });
 
         $(element).on('hidden.bs.modal', function(){
           scope.$apply(function(){
+            scope.$$childHead.newdata = {};
             scope.$parent[attrs.visible] = false;
           });
         });

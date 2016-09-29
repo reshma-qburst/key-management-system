@@ -107,15 +107,15 @@
                     </div>
                 </td>
                 <td title="'Password'">
-                    <span  class="editable-text" ng-if="!row.isEditing">{{row.password}}</span>
+                    <!-- <span  class="editable-text" ng-if="!row.isEditing">{{row.password}}</span> -->
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="password" ng-model="row.password" class="editable-input form-control input-sm" required />
+                        <input type="password" name="password" ng-model="row.password" class="editable-input form-control input-sm" required />
                     </div>
                 </td>
                 <td title="'Confirm Password'">
-                   <span  class="editable-text" ng-if="!row.isEditing">{{row.confirmPassword}}</span>
+                   <!-- <span  class="editable-text" ng-if="!row.isEditing">{{row.confirmPassword}}</span> -->
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="confirmPassword" ng-model="row.confirmPassword" class="editable-input form-control input-sm" required />
+                        <input type="password" name="confirmPassword" ng-model="row.confirmPassword" class="editable-input form-control input-sm" required />
                     </div> 
                 </td>
                 <td title="'Activates On'">
