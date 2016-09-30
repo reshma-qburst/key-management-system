@@ -1,9 +1,10 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope", "datepickerBeforeRender",function (loadJson,$scope,datepickerBeforeRender){
+    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope",function (loadJson,$scope){
     	$scope.showError = false;
     	$scope.showEditError = false;
+    	$scope.disabledKey = true;
     	var todaysDate = new Date();
     	$scope.dateToday = todaysDate.toDateString();
     	loadJson.getTableDefaultList().then(function(tableData) {
@@ -34,10 +35,6 @@
 	    	$scope.isSizeOfKeyDisabled = false;
 	    };
 
-	    $scope.beforeRender = function ($dates) {
-	    	datepickerBeforeRender.getDatesBeforeRender($dates);
-		};
-
        	$scope.addDataToTable = function(obj,modalForm){
        		if(obj != undefined){
        			if(modalForm.$valid){
@@ -50,14 +47,6 @@
 		            		}
 		            	});
 		            });
-			    	var activatesOn = "";
-			    	var expiresOn = "";
-			    	if(undefined != obj.activatesOn){
-			    		activatesOn = obj.activatesOn.toDateString();
-			    	}
-			    	if(undefined != obj.expiresOn){
-			    		expiresOn = obj.expiresOn.toDateString();
-			    	}
 			    	$scope.data.push({
 		                'description': obj.description, 
 		                'typeOfKey': obj.typeOfKey,
@@ -65,8 +54,8 @@
 		                'sizeOfKey' : obj.sizeOfKey,
 		                'password': obj.password,
 		                'confirmPassword': obj.confirmpassword,
-		                'activatesOn': activatesOn,
-		                'expiresOn': expiresOn,
+		                'activatesOn': obj.activatesOn,
+		                'expiresOn': obj.expiresOn,
 		                'key' : genKey
 		            });
 		            $scope.showModal = false;

@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-angular.module('keyManagement', ['ui.router','ngTable', 'ui.bootstrap.datetimepicker'])
+angular.module('keyManagement', ['ui.router','ngTable', '720kb.datepicker'])
 
 .config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/');

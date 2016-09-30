@@ -124,9 +124,25 @@ table {
 }
 
 label {
-  margin-bottom : 3px;
+  margin-bottom: 2px;
+  display: inline-block;
+  width: 50%;
+  float : left;
 }
 
 .mainWrapper {
   padding-bottom : 150px;
+}
+
+.form-control {
+  display: inline-block;
+  width: 50%;
+}
+
+.edit-form-control {
+  width : 100%;
+}
+
+datepicker {
+  width : 50%;
 }
