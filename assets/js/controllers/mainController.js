@@ -102,6 +102,7 @@
 		    	$scope.showEditError = false;
 		    }else if(confirmPwd != row.password){
 		    	$scope.showEditError = true;
+		    	$scope.showError = false;
 		    }else{
 		    	$scope.showEditError = false;
 		    	$scope.showError = false;
