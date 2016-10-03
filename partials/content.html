@@ -51,29 +51,17 @@
           </div>
           <div class="form-group">
             <label for="activatesOnNew">Activates On</label>
-            <div class="dropdown">
-              <a class="dropdown-toggle" id="activatesOn" role="button" data-toggle="dropdown" data-target="#" href="#">
-                <div class="input-group"><input type="text" class="form-control" name="activatesOn" ng-model="newdata.activatesOn" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker ng-model="newdata.activatesOn" data-datetimepicker-config="{ dropdownSelector: '#activatesOn' }" data-before-render="beforeRender($dates)"/>
-              </ul>
-            </div>
+            <datepicker date-format="EEE MMM d y" selector="form-control">
+              <input ng-model="newdata.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" required/>
+            </datepicker>
             <p ng-class="{'msg-error': modalForm.$submitted && modalForm.activatesOn.$invalid}" ng-if="modalForm.$submitted && modalForm.activatesOn.$error.required">Activates On Required.</p>
           </div>
           <div class="form-group">
             <label for="expiresOnNew">Expires On</label>
-            <div class="dropdown">
-              <a class="dropdown-toggle" id="expiresOn" role="button" data-toggle="dropdown" data-target="#" href="#" ng-model="newdata.expiresOn">
-                <div class="input-group"><input type="text" class="form-control" name="expiresOn" ng-model="newdata.expiresOn" required><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                </div>
-              </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <datetimepicker ng-model="newdata.expiresOn" data-datetimepicker-config="{ dropdownSelector: '#expiresOn' }" data-before-render="beforeRender($dates)"/>
-              </ul>
-            </div>
-             <p ng-class="{'msg-error': modalForm.$submitted && modalForm.expiresOn.$invalid}" ng-if="modalForm.$submitted && modalForm.expiresOn.$error.required">Expires On Required.</p>
+            <datepicker date-format="EEE MMM d y" selector="form-control">
+              <input ng-model="newdata.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" required/>
+            </datepicker>
+            <p ng-class="{'msg-error': modalForm.$submitted && modalForm.expiresOn.$invalid}" ng-if="modalForm.$submitted && modalForm.expiresOn.$error.required">Expires On Required.</p>
           </div>
           <button type="submit" class="btn btn-default">Add</button>
         </form>
@@ -86,57 +74,64 @@
                 <td title="'Description'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.description}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm" required />
+                        <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm edit-form-control" required />
                     </div>
                 </td>
                 <td title="'Type of Key'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.typeOfKey}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="typeOfKey" ng-model="row.typeOfKey" class="editable-input form-control input-sm" required />
+                        <!-- <input type="text" name="typeOfKey" ng-model="row.typeOfKey" class="editable-input form-control input-sm" required /> -->
+                        <select name="typeOfKey" ng-model="row.typeOfKey" ng-change="change(row.typeOfKey);" class="form-control selectpicker edit-form-control" required>
+                          <option value="Type1">Type 1</option>
+                          <option value="Type2">Type 2</option>
+                          <option value="Type3">Type 3</option>
+                          <option value="Type4">Type 4</option>
+                        </select>
                     </div> 
                 </td>
                 <td title="'Validation Mode'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.validationMode}}</span> 
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="validationMode" ng-model="row.validationMode" class="editable-input form-control input-sm" required />
+                      <!--   <input type="text" name="validationMode" ng-model="row.validationMode" class="editable-input form-control input-sm" required /> -->
+                        <select name="validationMode" ng-model="row.validationMode" class="form-control selectpicker edit-form-control" ng-change="changeValidationMode();" ng-disabled="isValidationModeDisabled">
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
                     </div> 
                 </td>
                 <td title="'Size of Key'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.sizeOfKey}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="sizeOfKey" ng-model="row.sizeOfKey" class="editable-input form-control input-sm" required />
+                        <!-- <input type="text" name="sizeOfKey" ng-model="row.sizeOfKey" class="editable-input form-control input-sm" required /> -->
+                        <select name="sizeOfKey" ng-model="row.sizeOfKey" class="form-control selectpicker edit-form-control" ng-disabled="isSizeOfKeyDisabled">
+                          <option value="Small">Small</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Large">Large</option>
+                        </select>
                     </div>
-                </td>
-                <td title="'Password'">
-                    <span  class="editable-text" ng-if="!row.isEditing">{{row.password}}</span>
-                    <div class="controls" ng-if="row.isEditing">
-                        <input type="password" id="password" name="password" ng-model="row.password" class="editable-input form-control input-sm" required />
-                    </div>
-                </td>
-                <td title="'Confirm Password'">
-                    <div class="controls" ng-if="row.isEditing">
-                        <input type="password" id="confirmPassword" name="confirmPassword" ng-model="row.confirmPassword" class="editable-input form-control input-sm" pw-check="password" required />
-                    </div>
-                    <span class="msg-error" ng-show="tableForm.confirmPassword.$error.pwmatch">
-                            Passwords don't match.
-                        </span>
                 </td>
                 <td title="'Activates On'">
                     <span  class="editable-text" ng-if="!row.isEditing">{{row.activatesOn}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="row.activatesOn" ng-model="row.activatesOn" class="editable-input form-control input-sm" required />
+                        <!-- <input type="text" name="row.activatesOn" ng-model="row.activatesOn" class="editable-input form-control input-sm" required /> -->
+                        <datepicker date-format="EEE MMM d y" selector="form-control">
+                          <input ng-model="row.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" required/>
+                        </datepicker>
                     </div>
                 </td>
                 <td title="'Expires On'">
                     <span  class="editable-text" ng-if="!row.isEditing">{{row.expiresOn}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="row.expiresOn" ng-model="row.expiresOn" class="editable-input form-control input-sm" required />
+                        <!-- <input type="text" name="row.expiresOn" ng-model="row.expiresOn" class="editable-input form-control input-sm" required /> -->
+                        <datepicker date-format="EEE MMM d y" selector="form-control">
+                          <input ng-model="row.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" required/>
+                        </datepicker>
                     </div>
                 </td>
                 <td title="'Key'" ng-class="{'greenHighlight': row.activatesOn > dateToday, 'yellowHighlight': row.activatesOn == dateToday , 'redHighlight' : (row.expiresOn < dateToday && row.activatesOn < dateToday)}">
                    <span class="editable-text" ng-if="!row.isEditing">{{row.key}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="key" ng-model="row.key" class="editable-input form-control input-sm" required />
+                        <input type="text" name="key" ng-model="row.key" class="editable-input form-control input-sm edit-form-control" ng-disabled="disabledKey" required />
                     </div>
                 </td>
                 <td>
