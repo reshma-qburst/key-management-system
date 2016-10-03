@@ -51,14 +51,14 @@
           </div>
           <div class="form-group">
             <label for="activatesOnNew">Activates On</label>
-            <datepicker date-format="EEE MMM d y" selector="form-control">
+            <datepicker date-format="EEE MMM d y" datepicker-options="dateOptions" selector="form-control">
               <input ng-model="newdata.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" required/>
             </datepicker>
             <p ng-class="{'msg-error': modalForm.$submitted && modalForm.activatesOn.$invalid}" ng-if="modalForm.$submitted && modalForm.activatesOn.$error.required">Activates On Required.</p>
           </div>
           <div class="form-group">
             <label for="expiresOnNew">Expires On</label>
-            <datepicker date-format="EEE MMM d y" selector="form-control">
+            <datepicker date-format="EEE MMM d y" datepicker-options="dateOptions" selector="form-control">
               <input ng-model="newdata.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" required/>
             </datepicker>
             <p ng-class="{'msg-error': modalForm.$submitted && modalForm.expiresOn.$invalid}" ng-if="modalForm.$submitted && modalForm.expiresOn.$error.required">Expires On Required.</p>

@@ -145,4 +145,12 @@ label {
 
 datepicker {
   width : 50%;
+  margin-bottom: 6px;
+}
+
+.modal-dialog {
+    margin: 30px auto;
+    @media screen and (min-width: 768px){
+      width: 397px;
+    }
 }
