@@ -51,15 +51,15 @@
           </div>
           <div class="form-group">
             <label for="activatesOnNew">Activates On</label>
-            <datepicker date-format="EEE MMM d y" selector="form-control">
-              <input ng-model="newdata.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" required/>
+            <datepicker date-format="EEE MMM d y" selector="form-control" date-disabled-dates="disableDates">
+              <input ng-model="newdata.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
             </datepicker>
             <p ng-class="{'msg-error': modalForm.$submitted && modalForm.activatesOn.$invalid}" ng-if="modalForm.$submitted && modalForm.activatesOn.$error.required">Activates On Required.</p>
           </div>
           <div class="form-group">
             <label for="expiresOnNew">Expires On</label>
-            <datepicker date-format="EEE MMM d y" selector="form-control">
-              <input ng-model="newdata.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" required/>
+            <datepicker date-format="EEE MMM d y" datepicker-options="dateOptions" selector="form-control">
+              <input ng-model="newdata.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
             </datepicker>
             <p ng-class="{'msg-error': modalForm.$submitted && modalForm.expiresOn.$invalid}" ng-if="modalForm.$submitted && modalForm.expiresOn.$error.required">Expires On Required.</p>
           </div>
@@ -80,7 +80,6 @@
                 <td title="'Type of Key'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.typeOfKey}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <!-- <input type="text" name="typeOfKey" ng-model="row.typeOfKey" class="editable-input form-control input-sm" required /> -->
                         <select name="typeOfKey" ng-model="row.typeOfKey" ng-change="change(row.typeOfKey);" class="form-control selectpicker edit-form-control" required>
                           <option value="Type1">Type 1</option>
                           <option value="Type2">Type 2</option>
@@ -92,7 +91,6 @@
                 <td title="'Validation Mode'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.validationMode}}</span> 
                     <div class="controls" ng-if="row.isEditing">
-                      <!--   <input type="text" name="validationMode" ng-model="row.validationMode" class="editable-input form-control input-sm" required /> -->
                         <select name="validationMode" ng-model="row.validationMode" class="form-control selectpicker edit-form-control" ng-change="changeValidationMode();" ng-disabled="isValidationModeDisabled">
                             <option value="True">True</option>
                             <option value="False">False</option>
@@ -102,7 +100,6 @@
                 <td title="'Size of Key'">
                     <span class="editable-text" ng-if="!row.isEditing">{{row.sizeOfKey}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <!-- <input type="text" name="sizeOfKey" ng-model="row.sizeOfKey" class="editable-input form-control input-sm" required /> -->
                         <select name="sizeOfKey" ng-model="row.sizeOfKey" class="form-control selectpicker edit-form-control" ng-disabled="isSizeOfKeyDisabled">
                           <option value="Small">Small</option>
                           <option value="Medium">Medium</option>
@@ -113,18 +110,16 @@
                 <td title="'Activates On'">
                     <span  class="editable-text" ng-if="!row.isEditing">{{row.activatesOn}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <!-- <input type="text" name="row.activatesOn" ng-model="row.activatesOn" class="editable-input form-control input-sm" required /> -->
                         <datepicker date-format="EEE MMM d y" selector="form-control">
-                          <input ng-model="row.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" required/>
+                          <input ng-model="row.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
                         </datepicker>
                     </div>
                 </td>
                 <td title="'Expires On'">
                     <span  class="editable-text" ng-if="!row.isEditing">{{row.expiresOn}}</span>
                     <div class="controls" ng-if="row.isEditing">
-                        <!-- <input type="text" name="row.expiresOn" ng-model="row.expiresOn" class="editable-input form-control input-sm" required /> -->
                         <datepicker date-format="EEE MMM d y" selector="form-control">
-                          <input ng-model="row.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" required/>
+                          <input ng-model="row.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
                         </datepicker>
                     </div>
                 </td>
