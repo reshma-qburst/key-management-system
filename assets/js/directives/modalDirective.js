@@ -30,8 +30,10 @@
 
         $(element).on('shown.bs.modal', function(){
           scope.$apply(function(){
+            if(scope.$$childHead.secondary != undefined)
+            scope.$$childHead.secondary.modalForm.$submitted = false;
+            if(scope.$$childHead.modalForm)
             scope.$$childHead.modalForm.$submitted = false;
-            scope.$$childHead.newdata = {};
             scope.$parent[attrs.visible] = true;
           });
         });
