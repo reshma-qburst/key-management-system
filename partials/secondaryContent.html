@@ -13,7 +13,8 @@
           </div>
           <div class="form-group">
             <label for="primarykeyNew">Primary Key</label>            
-            <input type="text" ng-model="secondary.primarykey" uib-typeahead="pkey as pkey.key for pkey in primaryKey | filter:{key:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="primarykeyNew" typeahead-on-select="onSelect($item, $model, $label, '','')" required>
+            <div><input type="text" ng-model="secondary.primarykey" uib-typeahead="pkey as pkey.key for pkey in primaryKeyList | filter:{key:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="primarykeyNew" typeahead-on-select="onSelect($item, $model, $label, '','')" required>
+            </div>
             <p ng-class="{'msg-error': secondary.modalForm.$submitted && secondary.modalForm.primarykeyNew.$invalid}" ng-if="secondary.modalForm.$submitted && secondary.modalForm.primarykeyNew.$error.required">Primary Key Required.</p>
           </div>
           <div class="form-group">
@@ -49,56 +50,11 @@
         </form>
     </datamodal>
     <!-- MODAL WINDOW ENDS -->
-    <!-- ANGULAR TABLE -->
+    <!-- ANGULAR DIRECTIVE TABLE -->
     <div class="tableWrapper">
-        <table ng-table="tableParams" ng-form="tableForm" class="table table-bordered">
-            <tr ng-repeat="row in dataSecondary track by $index" ng-form="rowForm">
-                <td title="'Description'">
-                    <span class="editable-text" ng-if="!row.isEditing">{{row.description}}</span>
-                    <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm edit-form-control" required />
-                    </div>
-                </td>
-				<td title="'Primary Key'">
-                    <span class="editable-text" ng-if="!row.isEditing">{{row.primarykey}}</span>
-                    <div class="controls" ng-if="row.isEditing">
-                    <input type="text" ng-model="row.primarykey" uib-typeahead="pkey as pkey.key for pkey in primaryKey | filter:{key:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="primarykey" typeahead-on-select="onSelect($item, $model, $label,'row',row)" required>
-                    </div> 
-                </td>
-                <td title="'Activates On'">
-                    <span  class="editable-text" ng-if="!row.isEditing">{{row.activatesOn}}</span>
-                    <div class="controls" ng-if="row.isEditing">
-                        <datepicker date-format="EEE MMM d y" selector="form-control">
-                          <input ng-model="row.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
-                        </datepicker>
-                    </div>
-                </td>
-                <td title="'Expires On'">
-                    <span  class="editable-text" ng-if="!row.isEditing">{{row.expiresOn}}</span>
-                    <div class="controls" ng-if="row.isEditing">
-                        <datepicker date-format="EEE MMM d y" selector="form-control">
-                          <input ng-model="row.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
-                        </datepicker>
-                    </div>
-                </td>
-                <td title="'Key'" ng-class="{'greenHighlight': row.activatesOn > dateToday, 'yellowHighlight': row.activatesOn == dateToday , 'redHighlight' : (row.expiresOn < dateToday && row.activatesOn < dateToday)}">
-                   <span class="editable-text" ng-if="!row.isEditing">{{row.key}}</span>
-                    <div class="controls" ng-if="row.isEditing">
-                        <input type="text" name="key" ng-model="row.key" class="editable-input form-control input-sm edit-form-control" ng-disabled="disabledKey" required />
-                    </div>
-                </td>
-                <td>
-                    <button class="btn btn-primary btn-sm" ng-click="saveSec(row);" ng-if="row.isEditing" ng-disabled="rowForm.$pristine"><span class="glyphicon glyphicon-ok"></span>
-                    </button>
-                    <button class="btn btn-default btn-sm" ng-click="cancelSec(row,rowForm);" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                    <button class="btn btn-default btn-sm" ng-click="editSec($index,row);" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span>
-                    </button>
-                    <button class="btn btn-danger btn-sm" ng-click="deleteSec($index);" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span>
-                    </button>
-                </td>
-            </tr>
+        <table table-data="" ng-form="tableForm" class="table table-bordered" columnheader="Description,Primary Key,Activates On,Expires On,Key" columnfield="description,primarykey,activatesOn,expiresOn,key"
+        components="dataSecondary">            
         </table>
     </div>
-    <!-- ANGULAR TABLE -->
+    <!-- ANGULAR DIRECTIVE TABLE -->
 </div>

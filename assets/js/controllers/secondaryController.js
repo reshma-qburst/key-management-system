@@ -12,11 +12,10 @@
 	    };
 	    $scope.dataSecondary =  [];
 	    loadJson.getTableDefaultList().then(function(tableData) {
-    		$scope.primaryKey = [];
+    		$scope.primaryKeyList = [];
     		angular.forEach(tableData.data, function(item) {
-    			 $scope.primaryKey.push({
+    			 $scope.primaryKeyList.push({
 		                'key': item.key,
-		                'primarykeyNumber' : item.primarykeyNumber,
 		                'activatesOn' : item.activatesOn,
 		                'expiresOn' : item.expiresOn
 		            });

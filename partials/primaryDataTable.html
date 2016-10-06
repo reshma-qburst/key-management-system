@@ -1,0 +1,70 @@
+<tr ng-repeat="row in data track by $index" ng-form="rowForm">
+                <td title="'Description'">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.description}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <input type="text" name="description" ng-model="row.description" class="editable-input form-control input-sm edit-form-control" required />
+                    </div>
+                </td>
+                <td title="'Type of Key'">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.typeOfKey}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <select name="typeOfKey" ng-model="row.typeOfKey" ng-change="change(row.typeOfKey);" class="form-control selectpicker edit-form-control" required>
+                          <option value="Type1">Type 1</option>
+                          <option value="Type2">Type 2</option>
+                          <option value="Type3">Type 3</option>
+                          <option value="Type4">Type 4</option>
+                        </select>
+                    </div>
+                </td>
+                <td title="'Validation Mode'">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.validationMode}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <select name="validationMode" ng-model="row.validationMode" class="form-control selectpicker edit-form-control" ng-change="changeValidationMode();" ng-disabled="isValidationModeDisabled">
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
+                    </div> 
+                </td>
+                <td title="'Size of Key'">
+                    <span class="editable-text" ng-if="!row.isEditing">{{row.sizeOfKey}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <select name="sizeOfKey" ng-model="row.sizeOfKey" class="form-control selectpicker edit-form-control" ng-disabled="isSizeOfKeyDisabled">
+                          <option value="Small">Small</option>
+                          <option value="Medium">Medium</option>
+                          <option value="Large">Large</option>
+                        </select>
+                    </div>
+                </td>
+                <td title="'Activates On'">
+                    <span  class="editable-text" ng-if="!row.isEditing">{{row.activatesOn}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <datepicker date-format="EEE MMM d y" selector="form-control">
+                          <input ng-model="row.activatesOn" id="activatesOn" name="activatesOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
+                        </datepicker>
+                    </div>
+                </td>
+                <td title="'Expires On'">
+                    <span  class="editable-text" ng-if="!row.isEditing">{{row.expiresOn}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <datepicker date-format="EEE MMM d y" selector="form-control">
+                          <input ng-model="row.expiresOn" id="expiresOn" name="expiresOn" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
+                        </datepicker>
+                    </div>
+                </td>
+                <td title="'Key'" ng-class="{'greenHighlight': row.activatesOn > dateToday, 'yellowHighlight': row.activatesOn == dateToday , 'redHighlight' : (row.expiresOn < dateToday && row.activatesOn < dateToday)}">
+                   <span class="editable-text" ng-if="!row.isEditing">{{row.key}}</span>
+                    <div class="controls" ng-if="row.isEditing">
+                        <input type="text" name="key" ng-model="row.key" class="editable-input form-control input-sm edit-form-control" ng-disabled="disabledKey" required />
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-sm" ng-click="save(row);" ng-if="row.isEditing" ng-disabled="rowForm.$pristine"><span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button class="btn btn-default btn-sm" ng-click="cancel(row,rowForm);" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button class="btn btn-default btn-sm" ng-click="edit($index,row);" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" ng-click="delete($index);" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </td>
+            </tr>
