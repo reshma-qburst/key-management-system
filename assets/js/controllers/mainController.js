@@ -98,11 +98,11 @@
 		    }
 		};
 
-		$scope.cancel = function(row,rowForm){
+		$scope.cancel = function(id,row,rowForm){
 			row.isEditing = false;			
 		};
 
-		$scope.save = function(row){
+		$scope.save = function(id,row){
 			row.isEditing = false;
 		};
     }]);

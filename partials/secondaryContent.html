@@ -52,8 +52,8 @@
     <!-- MODAL WINDOW ENDS -->
     <!-- ANGULAR DIRECTIVE TABLE -->
     <div class="tableWrapper">
-        <table table-data="" ng-form="tableForm" class="table table-bordered" columnheader="Description,Primary Key,Activates On,Expires On,Key" columnfield="description,primarykey,activatesOn,expiresOn,key"
-        components="dataSecondary">            
+        <table table-data="" ng-form="tableForm" class="table table-bordered" columnheader="Description,Primary Key,Activates On,Expires On,Key" columnfield="description,primarykey,activatesOn,expiresOn,key" components="dataSecondary" save="saveSec($index,dataSecondary[$index])" edit="editSec($index,dataSecondary[$index])" cancel="cancelSec($index,dataSecondary[$index],rowForm)"
+        delete="deleteSec($index)">   
         </table>
     </div>
     <!-- ANGULAR DIRECTIVE TABLE -->

@@ -67,7 +67,7 @@
 				if (confirm("Are you sure you want to delete this row?")) {
 		            angular.forEach($scope.dataSecondary, function(value,key){
 		            	if(key == id){
-							$scope.data.splice( id, 1 );
+							$scope.dataSecondary.splice( id, 1 );
 		                }
 		            });
 	        	}
@@ -92,11 +92,11 @@
 		    }
 		};
 
-		$scope.cancelSec = function(row,rowForm){
+		$scope.cancelSec = function(id,row,rowForm){
 			row.isEditing = false;			
 		};
 
-		$scope.saveSec = function(row){
+		$scope.saveSec = function(id,row){
 			row.isEditing = false;
 		};
 
