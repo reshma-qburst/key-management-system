@@ -14,12 +14,15 @@
 
     	loadJson.getTableDefaultList().then(function(tableData) {
     		angular.forEach(tableData.data, function(item) {
-    			 $scope.data.push(item);
-    			 $scope.primaryKeyList.push({
-    			 		'key' : item.key,
-		            	'activatesOn': item.activatesOn,
-		                'expiresOn': item.expiresOn
-    			 });
+    			$scope.data.push(item);
+    			$scope.primaryKeyList.push({
+    				'key' : item.key,
+		           	'activatesOn': item.activatesOn,
+		            'expiresOn': item.expiresOn
+    			});
+				if($scope.cookieData != undefined){
+    				$scope.cookieData.splice(0,1);
+    			}
     			angular.forEach($scope.cookieData,function (key,value) {
 		    		$scope.data.push(key);
 		    	});
@@ -81,13 +84,14 @@
 		            	'activatesOn': obj.activatesOn,
 		                'expiresOn': obj.expiresOn
 		            });
-		            $scope.addedData = angular.copy($scope.data);
-		            $scope.addedData.splice(0, 1);
-		            $cookieStore.put('primarydata',$scope.addedData);
 
 		            $scope.newPrimaryKey = angular.copy($scope.primaryKeyList);
 		            $cookieStore.put('cookiePrimaryListData', $scope.newPrimaryKey);
-		            
+
+		            $scope.addedData = angular.copy($scope.data);
+		            $scope.addedData.splice(0, 1);
+
+		            $cookieStore.put('primarydata',$scope.addedData);		            
 		            $scope.showModal = false;
 		    	}
 	    	}
@@ -104,6 +108,7 @@
 		            angular.forEach($scope.data, function(value,key){
 		            	if(key == id){
 							$scope.data.splice(id,1);
+							$cookieStore.put('primarydata',$scope.data);
 		                }
 		            });
 	        	}

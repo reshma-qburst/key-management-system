@@ -4,7 +4,7 @@
     angular.module('keyManagement').controller('secondaryController', ["loadJson","$scope","$cookieStore",function (loadJson,$scope,$cookieStore){
     	$scope.secondary = {};
     	$scope.showModal = false;
-    	$scope.showError = false;
+    	
     	$scope.showEditError = false;
     	$scope.disabledKey = true;
 	    $scope.toggleModal = function(){
@@ -14,6 +14,7 @@
 	    $scope.primaryKeyList = [];
 
 	    $scope.cookieSecondaryData = $cookieStore.get('secondarydata');
+
 	    angular.forEach($scope.cookieSecondaryData,function (key,value) {
 			$scope.dataSecondary.push(key);
 		});
@@ -29,7 +30,7 @@
 
 		$scope.addDataToSecondaryTable = function(){		
        			if($scope.secondary.modalForm.$valid){
-		       		$scope.showError = false;
+		       		
 			    	var genKey = Math.random().toString(36).substr(2, 16);
 			    	angular.forEach($scope.dataSecondary, function(objValue,objKey){
 		            	angular.forEach(objValue, function(val,key){
@@ -59,20 +60,16 @@
 		};
 
 		$scope.deleteSec = function(id) {
-			if(id==0){
-				$scope.showError = true;
-				$scope.showEditError = false;
-			}else{
-				$scope.showError = false;
 				$scope.showEditError = false;
 				if (confirm("Are you sure you want to delete this row?")) {
 		            angular.forEach($scope.dataSecondary, function(value,key){
 		            	if(key == id){
 							$scope.dataSecondary.splice( id, 1 );
+							$cookieStore.put('secondarydata',$scope.dataSecondary);
 		                }
 		            });
 	        	}
-			}
+			
         };
 
         $scope.editSec = function(id,row){
@@ -81,15 +78,15 @@
         		$scope.showEditError = false;
         		$scope.dataToCancel = row;
 		        row.isEditing = true;
-        		$scope.showError = false;
+        		
 		    }else if(confirmPwd == null){
 		    	$scope.showEditError = false;
 		    }else if(confirmPwd != row.password){
 		    	$scope.showEditError = true;
-		    	$scope.showError = false;
+		    	
 		    }else{
 		    	$scope.showEditError = false;
-		    	$scope.showError = false;
+		    	
 		    }
 		};
 
