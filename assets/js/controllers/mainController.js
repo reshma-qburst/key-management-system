@@ -1,19 +1,36 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope",function (loadJson,$scope){
+    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope","$cookieStore",function (loadJson,$scope,$cookieStore){
     	$scope.showError = false;
     	$scope.showEditError = false;
     	$scope.disabledKey = true;
     	var todaysDate = new Date();
     	$scope.dateToday = todaysDate.toDateString();
+    	$scope.primaryKeyList =  [];
+		$scope.data =  [];
+		$scope.cookieData = $cookieStore.get('primarydata');
+		$scope.cookiePrimaryList = $cookieStore.get('cookiePrimaryListData');
+
     	loadJson.getTableDefaultList().then(function(tableData) {
-    		$scope.data =  [];
     		angular.forEach(tableData.data, function(item) {
     			 $scope.data.push(item);
+    			 $scope.primaryKeyList.push({
+    			 		'key' : item.key,
+		            	'activatesOn': item.activatesOn,
+		                'expiresOn': item.expiresOn
+    			 });
+    			angular.forEach($scope.cookieData,function (key,value) {
+		    		$scope.data.push(key);
+		    	});
+		    	
+		    	if($scope.cookiePrimaryList == undefined){
+		    		$scope.cookiePrimaryList = $scope.primaryKeyList;
+		    	}
+		    	$cookieStore.put('cookiePrimaryListData',$scope.cookiePrimaryList);
     		});
 		});
-
+    	
 		$scope.showModal = false;
 	    $scope.toggleModal = function(){
 	        $scope.showModal = !$scope.showModal;
@@ -58,6 +75,18 @@
 		                'expiresOn': obj.expiresOn,
 		                'key' : genKey
 		            });
+		            $scope.primaryKeyList.push({
+		            	'key' : genKey,
+		            	'activatesOn': obj.activatesOn,
+		                'expiresOn': obj.expiresOn
+		            });
+		            $scope.addedData = angular.copy($scope.data);
+		            $scope.addedData.splice(0, 1);
+		            $cookieStore.put('primarydata',$scope.addedData);
+
+		            $scope.newPrimaryKey = angular.copy($scope.primaryKeyList);
+		            $cookieStore.put('cookiePrimaryListData', $scope.newPrimaryKey);
+		            
 		            $scope.showModal = false;
 		    	}
 	    	}
@@ -73,7 +102,7 @@
 				if (confirm("Are you sure you want to delete this row?")) {
 		            angular.forEach($scope.data, function(value,key){
 		            	if(key == id){
-							$scope.data.splice( id, 1 );
+							$scope.data.splice(id,1);
 		                }
 		            });
 	        	}

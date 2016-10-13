@@ -13,7 +13,7 @@
           </div>
           <div class="form-group">
             <label for="primarykeyNew">Primary Key</label>            
-            <div><input type="text" ng-model="secondary.primarykey" uib-typeahead="pkey as pkey.key for pkey in primaryKeyList | filter:{key:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="primarykeyNew" typeahead-on-select="onSelect($item, $model, $label,'','')" required>
+            <div><input type="text" ng-model="secondary.primarykey" uib-typeahead="pkey as pkey.key for pkey in primaryKeyList | filter:{key:$viewValue}" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="primarykeyNew" typeahead-on-select="onSelectSec($item, $model, $label,'','','')" required>
             </div>
             <p ng-class="{'msg-error': secondary.modalForm.$submitted && secondary.modalForm.primarykeyNew.$invalid}" ng-if="secondary.modalForm.$submitted && secondary.modalForm.primarykeyNew.$error.required">Primary Key Required.</p>
           </div>
@@ -52,8 +52,8 @@
     <!-- MODAL WINDOW ENDS -->
     <!-- ANGULAR DIRECTIVE TABLE -->
     <div class="tableWrapper">
-        <table table-data="" ng-form="tableForm" class="table table-bordered" columnheader="Description,Primary Key,Activates On,Expires On,Key" columnfield="description,primarykey,activatesOn,expiresOn,key" components="dataSecondary" save="saveSec($index,dataSecondary[$index])" edit="editSec($index,dataSecondary[$index])" cancel="cancelSec($index,dataSecondary[$index],rowForm)"
-        delete="deleteSec($index)" on-select="onSelect($item, $model, $label, 'row', dataSecondary[$index])" primarykeylist="primaryKeyList">
+        <table table-data="" ng-form="tableForm" class="table table-bordered" columnheader="Description,Primary Key,Activates On,Expires On,Key" columnfield="description,primarykey,activatesOn,expiresOn,key" components="dataSecondary" primarykeylist="primaryKeyList" save="saveSec($index,dataSecondary[$index])" edit="editSec($index,dataSecondary[$index])" cancel="cancelSec($index,dataSecondary[$index],rowForm)"
+        delete="deleteSec($index)">
         </table>
     </div>
     <!-- ANGULAR DIRECTIVE TABLE -->

@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('secondaryController', ["loadJson","$scope",function (loadJson,$scope){
+    angular.module('keyManagement').controller('secondaryController', ["loadJson","$scope","$cookieStore",function (loadJson,$scope,$cookieStore){
     	$scope.secondary = {};
     	$scope.showModal = false;
     	$scope.showError = false;
@@ -10,16 +10,21 @@
 	    $scope.toggleModal = function(){
 	        $scope.showModal = !$scope.showModal;
 	    };
-	    $scope.dataSecondary =  [];
-	    loadJson.getTableDefaultList().then(function(tableData) {
-    		$scope.primaryKeyList = [];
-    		angular.forEach(tableData.data, function(item) {
-    			 $scope.primaryKeyList.push({
-		                'key': item.key,
-		                'activatesOn' : item.activatesOn,
-		                'expiresOn' : item.expiresOn
-		            });
-    		});
+	    $scope.dataSecondary = [];
+	    $scope.primaryKeyList = [];
+
+	    $scope.cookieSecondaryData = $cookieStore.get('secondarydata');
+	    angular.forEach($scope.cookieSecondaryData,function (key,value) {
+			$scope.dataSecondary.push(key);
+		});
+
+	    $scope.cookiePrimaryData = $cookieStore.get('cookiePrimaryListData');
+	    angular.forEach($scope.cookiePrimaryData, function(item){
+		    $scope.primaryKeyList.push({
+		        'key' : item.key,
+		        'activatesOn': item.activatesOn,
+		        'expiresOn': item.expiresOn
+		    });	
 		});
 
 		$scope.addDataToSecondaryTable = function(){		
@@ -41,20 +46,16 @@
 		                'key' : genKey,
 		                'password' : $scope.secondary.passwordSecondary
 		            });
+
+		            $scope.addedData = angular.copy($scope.dataSecondary);
+		            $cookieStore.put('secondarydata',$scope.addedData);
 		            $scope.showModal = false;
 		    	}
-	    	
 	    };
 
-	    $scope.onSelect = function ($item, $model, $label, mflag,row) {
-	    	if(mflag == ""){
-		    	$scope.secondary.activatesOnSecondary = $item.activatesOn;
-		    	$scope.secondary.expiresOnSecondary = $item.expiresOn;
-			}else if(mflag == "row"){
-					row.primarykey = $item.key;
-					row.activatesOn = $item.activatesOn;
-		    		row.expiresOn = $item.expiresOn;
-			}
+	    $scope.onSelectSec = function ($item,$model,$label) {
+		    $scope.secondary.activatesOnSecondary = $item.activatesOn;
+		    $scope.secondary.expiresOnSecondary = $item.expiresOn;
 		};
 
 		$scope.deleteSec = function(id) {
@@ -99,7 +100,6 @@
 		$scope.saveSec = function(id,row){
 			row.isEditing = false;
 		};
-
     }]);
 })();
 

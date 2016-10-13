@@ -10,7 +10,6 @@
 	        	edit: '&',
 	        	cancel: '&',
 	        	delete: '&',
-	        	onSelect: '&',
 	        	primarykeylist: '='
 	        },
 			templateUrl : 'min_partials/tableDirectiveContent.html',

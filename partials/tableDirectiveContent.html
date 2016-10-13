@@ -26,7 +26,7 @@
             <datepicker ng-if="fieldName === 'activatesOn' || fieldName === 'expiresOn'" date-format="EEE MMM d y" selector="form-control">
                 <input ng-model="component[fieldName]" id="{{fieldName}}" name="{{fieldName}}" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
             </datepicker>
-            <input ng-if="fieldName === 'primarykey'" type="text" ng-model="component[fieldName]" uib-typeahead="pkey as pkey.key for pkey in primarykeylist | filter:$viewValue" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="{{fieldName}}" typeahead-on-select="onSelect({$item:$item, $model:$model, $label:$label, 'row':'row', component:component})" required>
+            <input ng-if="fieldName === 'primarykey'" type="text" ng-model="component[fieldName]" uib-typeahead="pkey as pkey.key for pkey in primarykeylist | filter:$viewValue" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="{{fieldName}}" required>
         </div>
     </td>
     <td>
