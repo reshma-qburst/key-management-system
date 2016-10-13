@@ -7,18 +7,19 @@
     <td ng-repeat="fieldName in fieldprops">
         <span class="editable-text" ng-if="!component.isEditing">{{component[fieldName]}}</span>
         <div class="controls" ng-if="component.isEditing" >
-            <input ng-if="fieldName === 'description' || fieldName === 'key'" type="text" name="{{fieldName}}" ng-model="component[fieldName]" class="editable-input form-control input-sm edit-form-control" required/>
-            <select ng-if="fieldName === 'typeOfKey'" name="typeOfKey" ng-model="component[fieldName]" ng-change="change(component[fieldName]);" class="form-control selectpicker edit-form-control" required>
+            <input ng-if="fieldName === 'description'" type="text" name="{{fieldName}}" ng-model="component[fieldName]" class="editable-input form-control input-sm edit-form-control" required/>
+            <input ng-if="fieldName === 'key'" type="text" name="{{fieldName}}" ng-model="component[fieldName]" class="editable-input form-control input-sm edit-form-control" ng-disabled="{tableKey:tableKey}" ng-class="{'greenHighlight': component[fieldName] > dateToday, 'yellowHighlight': component[fieldName] == dateToday , 'redHighlight' : component[fieldName] < dateToday}"/>
+            <select ng-if="fieldName === 'typeOfKey'" name="typeOfKey" ng-model="component[fieldName]" class="form-control selectpicker edit-form-control" ng-disabled="{isValidationModeDisabled:isValidationModeDisabled}">
                 <option value="Type1">Type 1</option>
                 <option value="Type2">Type 2</option>
                 <option value="Type3">Type 3</option>
                 <option value="Type4">Type 4</option>
             </select>
-            <select ng-if="fieldName === 'validationMode'" name="validationMode" ng-model="component[fieldName]" class="form-control selectpicker edit-form-control" ng-change="changeValidationMode();" ng-disabled="isValidationModeDisabled">
+            <select ng-if="fieldName === 'validationMode'" name="validationMode" ng-model="component[fieldName]" class="form-control selectpicker edit-form-control" ng-disabled="{isValidationModeDisabled:isValidationModeDisabled}">
                 <option value="True">True</option>
                 <option value="False">False</option>
             </select>
-            <select ng-if="fieldName === 'sizeOfKey'" name="sizeOfKey" ng-model="component[fieldName]" class="form-control selectpicker edit-form-control" ng-disabled="isSizeOfKeyDisabled">
+            <select ng-if="fieldName === 'sizeOfKey'" name="sizeOfKey" ng-model="component[fieldName]" class="form-control selectpicker edit-form-control" ng-disabled="{isSizeOfKeyDisabled:isSizeOfKeyDisabled}">
                 <option value="Small">Small</option>
                 <option value="Medium">Medium</option>
                 <option value="Large">Large</option>
@@ -26,7 +27,7 @@
             <datepicker ng-if="fieldName === 'activatesOn' || fieldName === 'expiresOn'" date-format="EEE MMM d y" selector="form-control">
                 <input ng-model="component[fieldName]" id="{{fieldName}}" name="{{fieldName}}" type="text" class="form-control edit-form-control" ng-readonly="true" required/>
             </datepicker>
-            <input ng-if="fieldName === 'primarykey'" type="text" ng-model="component[fieldName]" uib-typeahead="pkey as pkey.key for pkey in primarykeylist | filter:$viewValue" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="{{fieldName}}" required>
+            <input ng-if="fieldName === 'primarykey'" type="text" ng-model="component[fieldName]" uib-typeahead="pkey as pkey.key for pkey in primarykeylist | filter:$viewValue" class="form-control" typeahead-show-hint="true" typeahead-min-length="0" name="{{fieldName}}" ng-disabled="{tableKey:tableKey}">
         </div>
     </td>
     <td>

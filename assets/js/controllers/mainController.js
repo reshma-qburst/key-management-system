@@ -38,6 +38,7 @@
 
 	    $scope.isValidationModeDisabled = true;
 	    $scope.isSizeOfKeyDisabled = true;
+	    $scope.tableKey = true;
 
 	    $scope.change = function(val) {
 	        if(val === "Type1" || val === "Type3"){

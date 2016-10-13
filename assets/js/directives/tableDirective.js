@@ -10,7 +10,11 @@
 	        	edit: '&',
 	        	cancel: '&',
 	        	delete: '&',
-	        	primarykeylist: '='
+	        	primarykeylist: '=',
+	        	isValidationModeDisabled: '=',
+	        	isSizeOfKeyDisabled: '=',
+	        	tableKey: '=',
+	        	dateToday: '='
 	        },
 			templateUrl : 'min_partials/tableDirectiveContent.html',
 			link : function postLink(scope, element, attrs){
