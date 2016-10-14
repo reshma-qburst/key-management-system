@@ -86,10 +86,10 @@
 		            });
 
 		            $scope.newPrimaryKey = angular.copy($scope.primaryKeyList);
+		            $cookieStore.remove('cookiePrimaryListData');
 		            $cookieStore.put('cookiePrimaryListData', $scope.newPrimaryKey);
 
 		            $scope.addedData = angular.copy($scope.data);
-		            $scope.addedData.splice(0, 1);
 
 		            $cookieStore.put('primarydata',$scope.addedData);		            
 		            $scope.showModal = false;
