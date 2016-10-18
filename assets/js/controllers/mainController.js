@@ -13,25 +13,29 @@
 		$scope.cookiePrimaryList = $cookieStore.get('cookiePrimaryListData');
 
     	loadJson.getTableDefaultList().then(function(tableData) {
-    		angular.forEach(tableData.data, function(item) {
-    			$scope.data.push(item);
-    			$scope.primaryKeyList.push({
-    				'key' : item.key,
-		           	'activatesOn': item.activatesOn,
-		            'expiresOn': item.expiresOn
-    			});
-				if($scope.cookieData != undefined){
-    				$scope.cookieData.splice(0,1);
-    			}
-    			angular.forEach($scope.cookieData,function (key,value) {
-		    		$scope.data.push(key);
-		    	});
-		    	
-		    	if($scope.cookiePrimaryList == undefined){
-		    		$scope.cookiePrimaryList = $scope.primaryKeyList;
-		    	}
-		    	$cookieStore.put('cookiePrimaryListData',$scope.cookiePrimaryList);
+    		var dataobj = {};
+    		var primarykeyobj = {};
+    		angular.forEach(tableData, function(item) {
+    			angular.forEach(item, function(i) {
+    				dataobj[i.label] = i.data;
+    				if(i.label == 'key' || i.label == 'activatesOn' || i.label == 'expiresOn')
+    				primarykeyobj[i.label] = i.data;
+	    		});    			
     		});
+    		$scope.data.push(dataobj);
+	    	$scope.primaryKeyList.push(primarykeyobj);
+    			
+			if($scope.cookieData != undefined){
+    			$scope.cookieData.splice(0,1);
+    		}
+    		angular.forEach($scope.cookieData,function (key,value) {
+		    	$scope.data.push(key);
+		    });
+		    	
+		    if($scope.cookiePrimaryList == undefined){
+		    	$scope.cookiePrimaryList = $scope.primaryKeyList;
+		    }
+		    $cookieStore.put('cookiePrimaryListData',$scope.cookiePrimaryList);
 		});
     	
 		$scope.showModal = false;

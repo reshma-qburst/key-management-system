@@ -28,7 +28,7 @@
 		    });	
 		});
 
-		$scope.addDataToSecondaryTable = function(){		
+		$scope.addDataToSecondaryTable = function(){	
        			if($scope.secondary.modalForm.$valid){
 		       		
 			    	var genKey = Math.random().toString(36).substr(2, 16);
