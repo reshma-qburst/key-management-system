@@ -1,11 +1,4 @@
-<!-- content.html -->
-<div class="container">
-    <div class="alert alert-danger" ng-if="showEditError">You have entered incorrect password!</div>
-    <div class="alert alert-warning" ng-if="showError">This is the default data!</div>
-    <button class="addButton" ng-click="toggleModal()">Add</button>
-    <!-- MODAL WINDOW STARTS -->
-    <datamodal title="Add New" visible="showModal">
-        <form name="modalForm" ng-submit="addDataToTable(newdata,modalForm);" novalidate>
+<form name="modalForm" ng-submit="addDataToTable(newdata,modalForm);" novalidate>
           <div class="form-group">
             <label for="descriptionNew">Description</label>
             <input type="text" class="form-control" name="descriptionNew" ng-model="newdata.description" required/>
@@ -65,14 +58,3 @@
           </div>
           <button type="submit" class="btn btn-default">Add</button>
         </form>
-    </datamodal>
-    <!-- MODAL WINDOW ENDS -->
-    <!-- ANGULAR DIRECTIVE TABLE -->
-    <div class="tableWrapper">
-        <table table-data="" ng-form="tableForm" class="table table-bordered"
-        columnheader="Description,Type of Key,Validation Mode,Size of Key,Activates On,Expires On,Key" columnfield="description,typeOfKey,validationMode,sizeOfKey,activatesOn,expiresOn,key" 
-        components="data" save="save($index,data[$index])" edit="edit($index,data[$index])" cancel="cancel($index,data[$index],rowForm)"
-        delete="delete($index)" isValidationModeDisabled="isValidationModeDisabled" isSizeOfKeyDisabled="isSizeOfKeyDisabled" tableKey="tableKey" dateToday="dateToday"></table>
-    </div>
-    <!-- ANGULAR DIRECTIVE TABLE -->
-</div>

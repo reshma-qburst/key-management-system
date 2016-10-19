@@ -1,19 +1,42 @@
 (function() {
     "use strict";
 
-    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope",function (loadJson,$scope){
+    angular.module('keyManagement').controller('mainController', ["loadJson", "$scope","$cookieStore",function (loadJson,$scope,$cookieStore){
     	$scope.showError = false;
     	$scope.showEditError = false;
     	$scope.disabledKey = true;
     	var todaysDate = new Date();
     	$scope.dateToday = todaysDate.toDateString();
+    	$scope.primaryKeyList =  [];
+		$scope.data =  [];
+		$scope.cookieData = $cookieStore.get('primarydata');
+		$scope.cookiePrimaryList = $cookieStore.get('cookiePrimaryListData');
     	loadJson.getTableDefaultList().then(function(tableData) {
-    		$scope.data =  [];
-    		angular.forEach(tableData.data, function(item) {
-    			 $scope.data.push(item);
+    		var dataobj = {};
+    		var primarykeyobj = {};
+    		angular.forEach(tableData, function(item) {
+    			angular.forEach(item, function(i) {
+    				dataobj[i.label] = i.data;
+    				if(i.label == 'key' || i.label == 'activatesOn' || i.label == 'expiresOn')
+    				primarykeyobj[i.label] = i.data;
+	    		});    			
     		});
+    		$scope.data.push(dataobj);
+	    	$scope.primaryKeyList.push(primarykeyobj);
+    			
+			if($scope.cookieData != undefined){
+    			$scope.cookieData.splice(0,1);
+    		}
+    		angular.forEach($scope.cookieData,function (key,value) {
+		    	$scope.data.push(key);
+		    });
+		    	
+		    if($scope.cookiePrimaryList == undefined){
+		    	$scope.cookiePrimaryList = $scope.primaryKeyList;
+		    }
+		    $cookieStore.put('cookiePrimaryListData',$scope.cookiePrimaryList);
 		});
-
+    	
 		$scope.showModal = false;
 	    $scope.toggleModal = function(){
 	        $scope.showModal = !$scope.showModal;
@@ -21,6 +44,7 @@
 
 	    $scope.isValidationModeDisabled = true;
 	    $scope.isSizeOfKeyDisabled = true;
+	    $scope.tableKey = true;
 
 	    $scope.change = function(val) {
 	        if(val === "Type1" || val === "Type3"){
@@ -58,6 +82,19 @@
 		                'expiresOn': obj.expiresOn,
 		                'key' : genKey
 		            });
+		            $scope.primaryKeyList.push({
+		            	'key' : genKey,
+		            	'activatesOn': obj.activatesOn,
+		                'expiresOn': obj.expiresOn
+		            });
+
+		            $scope.newPrimaryKey = angular.copy($scope.primaryKeyList);
+		            $cookieStore.remove('cookiePrimaryListData');
+		            $cookieStore.put('cookiePrimaryListData', $scope.newPrimaryKey);
+
+		            $scope.addedData = angular.copy($scope.data);
+
+		            $cookieStore.put('primarydata',$scope.addedData);		            
 		            $scope.showModal = false;
 		    	}
 	    	}
@@ -73,7 +110,8 @@
 				if (confirm("Are you sure you want to delete this row?")) {
 		            angular.forEach($scope.data, function(value,key){
 		            	if(key == id){
-							$scope.data.splice( id, 1 );
+							$scope.data.splice(id,1);
+							$cookieStore.put('primarydata',$scope.data);
 		                }
 		            });
 	        	}
@@ -98,11 +136,11 @@
 		    }
 		};
 
-		$scope.cancel = function(row,rowForm){
+		$scope.cancel = function(id,row,rowForm){
 			row.isEditing = false;			
 		};
 
-		$scope.save = function(row){
+		$scope.save = function(id,row){
 			row.isEditing = false;
 		};
     }]);

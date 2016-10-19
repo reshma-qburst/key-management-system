@@ -1,13 +1,55 @@
 [
-    {
-        "description": "Description 1",
-        "typeOfKey": "Type1",
-        "validationMode": "True",
-        "sizeOfKey": "Small",
-        "activatesOn": "Fri Sep 23 2016",
-        "expiresOn": "Thu Sep 28 2016",
-        "key" : "H4geG$35gHFJ550@",
-        "password" : "xxyyzz",
-        "confirmPassword" : "xxyyzz"
-    }
+  {
+    "type": "text",
+    "data": "Description 1",
+    "label": "description",
+    "isDisabled": "false"
+  },
+  {
+    "type": "select",
+    "data": "Type1",
+    "label": "typeOfKey",
+    "options": ["Type1","Type2","Type3","Type4"],
+    "isDisabled": "true"
+  },
+  {
+    "type": "select",
+    "data": "True",
+    "label": "validationMode",
+    "options": ["True","False"],
+    "isDisabled": "true"
+  },
+  {
+    "type": "select",
+    "data": "Small",
+    "label": "sizeOfKey",
+    "options": ["Small","Medium","Large"],
+    "isDisabled": "true"
+  },
+  {
+    "type": "date",
+    "data": "Fri Sep 23 2016",
+    "label": "activatesOn"
+  },
+  {
+    "type": "date",
+    "data": "Thu Sep 28 2016",
+    "label": "expiresOn"
+  },
+  {
+    "type": "text",
+    "data": "H4geG$35gHFJ550@",
+    "label": "key",
+    "isDisabled": "true"
+  },
+  {
+    "type": "password",
+    "data": "xxyyzz",
+    "label": "password"
+  },
+  {
+    "type": "password",
+    "data": "xxyyzz",
+    "label": "confirmPassword"
+  }
 ]
