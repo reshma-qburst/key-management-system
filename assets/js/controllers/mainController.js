@@ -11,6 +11,7 @@
 		$scope.data =  [];
 		$scope.cookieData = $cookieStore.get('primarydata');
 		$scope.cookiePrimaryList = $cookieStore.get('cookiePrimaryListData');
+		$scope.typelist = [];
 
     	loadJson.getTableDefaultList().then(function(tableData) {
     		var dataobj = {};
@@ -18,6 +19,7 @@
     		angular.forEach(tableData, function(item) {
     			angular.forEach(item, function(i) {
     				dataobj[i.label] = i.data;
+    				
     				if(i.label == 'key' || i.label == 'activatesOn' || i.label == 'expiresOn')
     				primarykeyobj[i.label] = i.data;
 	    		});    			

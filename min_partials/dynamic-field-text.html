@@ -1,1 +1,1 @@
-<input type="text" name="{{fieldName}}" ng-model="component[fieldName]" class="editable-input form-control input-sm edit-form-control">
+<input ng-if="fieldName != 'description'" type="text" name="{{fieldName}}" ng-model="component[fieldName]" class="editable-input form-control input-sm edit-form-control" ng-disabled="{isValidationModeDisabled:isValidationModeDisabled}"> <input ng-if="fieldName == 'description'" type="text" name="{{fieldName}}" ng-model="component[fieldName]" class="editable-input form-control input-sm edit-form-control">
